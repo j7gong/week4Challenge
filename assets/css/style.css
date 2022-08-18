@@ -64,9 +64,17 @@
     color: var(--secondary);
     border-radius: 15px;
     font-size: 30px;
+    margin: 10px;
   }
 
   .btn:hover {
     background-color: var(--fourth);
     cursor: pointer;
+  }
+
+  .question-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
   }
