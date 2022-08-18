@@ -4,6 +4,7 @@ var timeLeft = 10;
 
 var startIntroEl = document.querySelector("#start-intro");
 var questionContentEl = document.querySelector("#question");
+var optionContentEl = document.querySelector("#option");
 var option1El = document.querySelector("#option1");
 var option2El = document.querySelector("#option2");
 var option3El = document.querySelector("#option3");
@@ -78,6 +79,7 @@ var displayQuestion = function () {
     questionContentEl.innerText = questions[0].question;
     
     // display option
+    optionContentEl.style.visibility = 'visible';
     option1El.innerText = "1. "+ questions[0].answers[1];
     option2El.innerText = "2. "+ questions[0].answers[2];
     option3El.innerText = "3. "+ questions[0].answers[3];
