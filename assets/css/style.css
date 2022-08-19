@@ -3,6 +3,7 @@
     --secondary: white;
     --tertiary: rgb(53, 28, 117);
     --fourth: rgb(216, 160, 241);
+    --fifth: rgb(155, 155, 155);
   }
 
   body {
@@ -78,6 +79,25 @@
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+    visibility: hidden;
+  }
+
+  .answer-response {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: auto;
+    margin-top: 10%;
+    visibility: hidden;
+  }
+
+  .answer {
+    font-style: italic;
+    font-size: 50px;
+    color: var(--fifth);
+    margin: auto;
+    border-top: 3px solid var(--fifth);
+    padding: 20px;
+    font-weight: lighter;
     visibility: hidden;
   }
 

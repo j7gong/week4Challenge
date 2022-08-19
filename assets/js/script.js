@@ -9,6 +9,7 @@ var option1El = document.querySelector("#option1");
 var option2El = document.querySelector("#option2");
 var option3El = document.querySelector("#option3");
 var option4El = document.querySelector("#option4");
+var answerEl = document.querySelector("#answer");
 
 var questions = [
     {
@@ -44,7 +45,7 @@ var questions = [
 ]
 
 // function to display time
-var renderTime = function () {
+function renderTime() {
     // render count on the screen
     countNumEl.innerHTML = timeLeft;
 
@@ -58,7 +59,7 @@ var renderTime = function () {
 
     // decrease remaining time by "1"
     timeLeft -= 1;
-};
+}
 
 // start Timer
 var startTimer = function () {
@@ -75,7 +76,7 @@ var hideStart = function () {
 
 // display question
 var displayQuestion = function () {
-    // display question
+
     questionContentEl.innerText = questions[0].question;
     
     // display option
@@ -84,9 +85,64 @@ var displayQuestion = function () {
     option2El.innerText = "2. "+ questions[0].answers[2];
     option3El.innerText = "3. "+ questions[0].answers[3];
     option4El.innerText = "4. "+ questions[0].answers[4];
+
+};
+
+// Respond to the option checked
+var option1Response = function () {
+    var option = 1;
+    if (option == questions[0].correctAnswer) {
+        answerEl.innerText = 'Correct!';
+        
+    } else {
+        answerEl.innerText = 'Wrong!';
+    };
+
+    answerEl.style.visibility = 'visible';
+};
+
+var option2Response = function () {
+    var option = 2;
+    if (option == questions[0].correctAnswer) {
+        answerEl.innerText = 'Correct!';
+        
+    } else {
+        answerEl.innerText = 'Wrong!';
+    };
+
+    answerEl.style.visibility = 'visible';
+};
+
+var option3Response = function () {
+    var option = 3;
+    if (option == questions[0].correctAnswer) {
+        answerEl.innerText = 'Correct!';
+        
+    } else {
+        answerEl.innerText = 'Wrong!';
+    };
+
+    answerEl.style.visibility = 'visible';
+};
+
+var option4Response = function () {
+    var option = 4;
+    if (option == questions[0].correctAnswer) {
+        answerEl.innerText = 'Correct!';
+        
+    } else {
+        answerEl.innerText = 'Wrong!';
+    };
     
+    answerEl.style.visibility = 'visible';
 };
 
 startBtnEl.addEventListener("click", startTimer);
 startBtnEl.addEventListener("click", hideStart);
+
 startBtnEl.addEventListener("click", displayQuestion);
+
+option1El.addEventListener("click", option1Response);
+option2El.addEventListener("click", option2Response);
+option3El.addEventListener("click", option3Response);
+option4El.addEventListener("click", option4Response);
