@@ -11,6 +11,7 @@ var option3El = document.querySelector("#option3");
 var option4El = document.querySelector("#option4");
 var answerEl = document.querySelector("#answer");
 
+// Initiate question list
 var questions = [
     {
         question: 'Inside which HTML element do we put the JavaScript?',
@@ -100,32 +101,30 @@ var displayQuestion = function () {
 
 };
 
-// Respond to the option checked
-var option1Response = function () {
-    var option = 1;
+// Response that applies to any options checked
+var optionCommonResponse = function (option, questionsNum) {
     if (option == questions[questionsNum].correctAnswer) {
         answerEl.innerText = 'Correct!';
         
     } else {
         answerEl.innerText = 'Wrong!';
     };
-
-    answerEl.style.visibility = 'visible';
     
+    answerEl.style.visibility = 'visible';
+};
+
+// Respond to the option checked
+var option1Response = function () {
+    var option = 1;
+    optionCommonResponse(option, questionsNum);
+
     localStorage.setItem("questionsNum", ++questionsNum); 
     console.log("ClickOption1: " + questionsNum);
 };
 
 var option2Response = function () {
     var option = 2;
-    if (option == questions[questionsNum].correctAnswer) {
-        answerEl.innerText = 'Correct!';
-        
-    } else {
-        answerEl.innerText = 'Wrong!';
-    };
-
-    answerEl.style.visibility = 'visible';
+    optionCommonResponse(option, questionsNum);
 
     localStorage.setItem("questionsNum", ++questionsNum); 
     console.log("ClickOption2: " + questionsNum);
@@ -133,14 +132,7 @@ var option2Response = function () {
 
 var option3Response = function () {
     var option = 3;
-    if (option == questions[questionsNum].correctAnswer) {
-        answerEl.innerText = 'Correct!';
-        
-    } else {
-        answerEl.innerText = 'Wrong!';
-    };
-
-    answerEl.style.visibility = 'visible';
+    optionCommonResponse(option, questionsNum);
 
     localStorage.setItem("questionsNum", ++questionsNum); 
     console.log("ClickOption3: " + questionsNum);
@@ -148,14 +140,7 @@ var option3Response = function () {
 
 var option4Response = function () {
     var option = 4;
-    if (option == questions[questionsNum].correctAnswer) {
-        answerEl.innerText = 'Correct!';
-        
-    } else {
-        answerEl.innerText = 'Wrong!';
-    };
-    
-    answerEl.style.visibility = 'visible';
+    optionCommonResponse(option, questionsNum);
 
     localStorage.setItem("questionsNum", ++questionsNum); 
     console.log("ClickOption4: " + questionsNum);
