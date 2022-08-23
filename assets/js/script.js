@@ -45,6 +45,12 @@ var questions = [
     }
 ]
 
+var endGame = function () {
+    questionContentEl.innerText = "All Done!";
+    optionContentEl.style.visibility = 'hidden';
+    localStorage.setItem("questionsNum", 0);
+};
+
 // Initiate number to count the question that has been answered 
 var questionsNum = localStorage.getItem("questionsNum");
 
@@ -59,6 +65,8 @@ function renderTime() {
     if (timeLeft <= 0) {
         clearInterval(timer);
         countNumEl.innerHTML = 0;
+        endGame();
+
     };
 
     // console.log(document.querySelector("#countdownNum"));
@@ -94,9 +102,7 @@ var displayQuestion = function () {
         option3El.innerText = "3. "+ questions[questionsNum].answers[3];
         option4El.innerText = "4. "+ questions[questionsNum].answers[4];
     } else {
-        questionContentEl.innerText = "All Done!";
-        optionContentEl.style.visibility = 'hidden';
-        localStorage.setItem("questionsNum", 0);
+        endGame();
     };
 
 };
