@@ -1,6 +1,6 @@
 var startBtnEl = document.querySelector("#btn-start");
 var countNumEl = document.querySelector("#countdownNum");
-var timeLeft = 10; 
+var timeLeft = 75; 
 
 var startIntroEl = document.querySelector("#start-intro");
 var questionContentEl = document.querySelector("#question");
@@ -108,6 +108,8 @@ var optionCommonResponse = function (option, questionsNum) {
         
     } else {
         answerEl.innerText = 'Wrong!';
+        // Substract time from clock 
+        timeLeft -= 20;
     };
     
     answerEl.style.visibility = 'visible';
