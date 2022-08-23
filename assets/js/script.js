@@ -56,6 +56,9 @@ var endGame = function () {
     // Display final score and allow user to save intials
     finalScoreEl.style.visibility = 'visible';
     enterInitialEl.style.visibility = 'visible';
+    
+    // hide options
+    optionContentEl.remove();
 };
 
 // Initiate number to count the question that has been answered 
@@ -91,8 +94,8 @@ var startTimer = function () {
 
 // hide Start Content
 var hideStart = function () {
-    startBtnEl.style.visibility = 'hidden';
-    startIntroEl.style.visibility = 'hidden';
+    startBtnEl.remove();
+    startIntroEl.remove();
 };
 
 // display question
