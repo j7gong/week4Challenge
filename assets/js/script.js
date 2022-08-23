@@ -11,6 +11,9 @@ var option3El = document.querySelector("#option3");
 var option4El = document.querySelector("#option4");
 var answerEl = document.querySelector("#answer");
 
+var finalScoreEl = document.querySelector("#final-score");
+var enterInitialEl = document.querySelector("#enterInitials");
+
 // Initiate question list
 var questions = [
     {
@@ -49,6 +52,10 @@ var endGame = function () {
     questionContentEl.innerText = "All Done!";
     optionContentEl.style.visibility = 'hidden';
     localStorage.setItem("questionsNum", 0);
+
+    // Display final score and allow user to save intials
+    finalScoreEl.style.visibility = 'visible';
+    enterInitialEl.style.visibility = 'visible';
 };
 
 // Initiate number to count the question that has been answered 

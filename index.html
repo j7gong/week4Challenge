@@ -18,6 +18,19 @@
     <main class="page-content" id="page-content">
         
         <h1 class="questions" id="question">Coding Quiz Challenge</h1>
+        <!-- Final Score -->
+        <div class="finalScore" id="final-score">
+            <p>Your final score is: <span id="finalScore">0</span></p>
+            
+        </div>
+        <!-- Enter Initials -->
+        <div class="enterInitials" id="enterInitials">
+            <label for="name">Enter Initials: </label>
+            <input type="text" name="initials" id="initials" class="input"/>
+            <div class="btn-container">
+                <button class="btn" id="btn-submit">Submit</button>
+            </div>
+        </div>
 
         <p id="start-intro">Try to answer the following code-related questions within the time limit. 
             Keep in mind that incorrect answers will penalize your score/time by 10 seconds.
@@ -35,7 +48,7 @@
         </div>
         <!-- Answer Response -->
         <div class="answer-response" id="response">
-            <h3 class="answer" id="answer">Wrong !</h3>
+            <h3 class="answer" id="answer">Wrong!</h3>
         </div>
 
     </main>
