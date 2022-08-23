@@ -44,6 +44,11 @@ var questions = [
     }
 ]
 
+// Initiate number to count the question that has been answered 
+var questionsNum = localStorage.getItem("questionsNum");
+
+console.log("default question number: " + questionsNum);
+
 // function to display time
 function renderTime() {
     // render count on the screen
@@ -55,7 +60,7 @@ function renderTime() {
         countNumEl.innerHTML = 0;
     };
 
-    console.log(document.querySelector("#countdownNum"));
+    // console.log(document.querySelector("#countdownNum"));
 
     // decrease remaining time by "1"
     timeLeft -= 1;
@@ -77,21 +82,28 @@ var hideStart = function () {
 // display question
 var displayQuestion = function () {
 
-    questionContentEl.innerText = questions[0].question;
+    if (questionsNum < questions.length) {
+
+        questionContentEl.innerText = questions[questionsNum].question;
     
-    // display option
-    optionContentEl.style.visibility = 'visible';
-    option1El.innerText = "1. "+ questions[0].answers[1];
-    option2El.innerText = "2. "+ questions[0].answers[2];
-    option3El.innerText = "3. "+ questions[0].answers[3];
-    option4El.innerText = "4. "+ questions[0].answers[4];
+        // display option
+        optionContentEl.style.visibility = 'visible';
+        option1El.innerText = "1. "+ questions[questionsNum].answers[1];
+        option2El.innerText = "2. "+ questions[questionsNum].answers[2];
+        option3El.innerText = "3. "+ questions[questionsNum].answers[3];
+        option4El.innerText = "4. "+ questions[questionsNum].answers[4];
+    } else {
+        questionContentEl.innerText = "All Done!";
+        optionContentEl.style.visibility = 'hidden';
+        localStorage.setItem("questionsNum", 0);
+    };
 
 };
 
 // Respond to the option checked
 var option1Response = function () {
     var option = 1;
-    if (option == questions[0].correctAnswer) {
+    if (option == questions[questionsNum].correctAnswer) {
         answerEl.innerText = 'Correct!';
         
     } else {
@@ -99,11 +111,14 @@ var option1Response = function () {
     };
 
     answerEl.style.visibility = 'visible';
+    
+    localStorage.setItem("questionsNum", ++questionsNum); 
+    console.log("ClickOption1: " + questionsNum);
 };
 
 var option2Response = function () {
     var option = 2;
-    if (option == questions[0].correctAnswer) {
+    if (option == questions[questionsNum].correctAnswer) {
         answerEl.innerText = 'Correct!';
         
     } else {
@@ -111,11 +126,14 @@ var option2Response = function () {
     };
 
     answerEl.style.visibility = 'visible';
+
+    localStorage.setItem("questionsNum", ++questionsNum); 
+    console.log("ClickOption2: " + questionsNum);
 };
 
 var option3Response = function () {
     var option = 3;
-    if (option == questions[0].correctAnswer) {
+    if (option == questions[questionsNum].correctAnswer) {
         answerEl.innerText = 'Correct!';
         
     } else {
@@ -123,11 +141,14 @@ var option3Response = function () {
     };
 
     answerEl.style.visibility = 'visible';
+
+    localStorage.setItem("questionsNum", ++questionsNum); 
+    console.log("ClickOption3: " + questionsNum);
 };
 
 var option4Response = function () {
     var option = 4;
-    if (option == questions[0].correctAnswer) {
+    if (option == questions[questionsNum].correctAnswer) {
         answerEl.innerText = 'Correct!';
         
     } else {
@@ -135,14 +156,23 @@ var option4Response = function () {
     };
     
     answerEl.style.visibility = 'visible';
+
+    localStorage.setItem("questionsNum", ++questionsNum); 
+    console.log("ClickOption4: " + questionsNum);
 };
 
 startBtnEl.addEventListener("click", startTimer);
 startBtnEl.addEventListener("click", hideStart);
-
 startBtnEl.addEventListener("click", displayQuestion);
 
 option1El.addEventListener("click", option1Response);
+option1El.addEventListener("click", displayQuestion);
+
 option2El.addEventListener("click", option2Response);
+option2El.addEventListener("click", displayQuestion);
+
 option3El.addEventListener("click", option3Response);
+option3El.addEventListener("click", displayQuestion);
+
 option4El.addEventListener("click", option4Response);
+option4El.addEventListener("click", displayQuestion);
