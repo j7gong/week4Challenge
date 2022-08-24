@@ -17,6 +17,7 @@ var finalScoreEl = document.querySelector("#final-score");
 var scoreTextEl = document.querySelector("#scoreText");
 var enterInitialEl = document.querySelector("#enterInitials");
 var pageContentEl = document.querySelector("#page-content");
+var headerEl = document.querySelector("header");
 
 // Initiate question list
 var questions = [
@@ -168,8 +169,9 @@ var option4Response = function () {
     console.log("ClickOption4: " + questionsNum);
 };
 
-var hideAnswer = function () {
+var hideAnswerHeader = function () {
     responseEl.remove();
+    headerEl.style.visibility = "hidden";
 };
 
 var refresh = function () {
@@ -232,7 +234,7 @@ option3El.addEventListener("click", displayQuestion);
 option4El.addEventListener("click", option4Response);
 option4El.addEventListener("click", displayQuestion);
 
-submitBtnEl.addEventListener("click", hideAnswer);
+submitBtnEl.addEventListener("click", hideAnswerHeader);
 submitBtnEl.addEventListener("click", showScore);
 
 
