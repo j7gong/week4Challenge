@@ -10,10 +10,13 @@ var option1El = document.querySelector("#option1");
 var option2El = document.querySelector("#option2");
 var option3El = document.querySelector("#option3");
 var option4El = document.querySelector("#option4");
+var responseEl = document.querySelector("#response");
 var answerEl = document.querySelector("#answer");
 
 var finalScoreEl = document.querySelector("#final-score");
+var scoreTextEl = document.querySelector("#scoreText");
 var enterInitialEl = document.querySelector("#enterInitials");
+var pageContentEl = document.querySelector("#page-content");
 
 // Initiate question list
 var questions = [
@@ -166,7 +169,38 @@ var option4Response = function () {
 };
 
 var hideAnswer = function () {
-    answerEl.remove();
+    responseEl.remove();
+};
+
+var showScore = function () {
+    // Create placeholder to display initials input with score
+    var initialsInput = document.querySelector("input[name='initials']").value;
+    var displayScoreEl = document.createElement("div");
+    displayScoreEl.className = "displayScore";
+    var resultEl = document.createElement("p");
+    resultEl.innerText = initialsInput;
+    displayScoreEl.appendChild(resultEl);
+    finalScoreEl.append(displayScoreEl);
+    
+    scoreTextEl.remove();
+    enterInitialEl.remove();
+
+    // Create back button
+    var btnContainerEl = document.createElement("div");
+    var backBtnEl = document.createElement("button");
+    backBtnEl.textContent = "Go back";
+    backBtnEl.className = "btn";
+    
+    console.log(backBtnEl);
+    btnContainerEl.appendChild(backBtnEl);
+    
+    // Create clear button
+    var clearBtnEl = document.createElement("button");
+    clearBtnEl.textContent = "Clear high scores";
+    clearBtnEl.className = "btn";
+    btnContainerEl.appendChild(clearBtnEl);
+
+    pageContentEl.appendChild(btnContainerEl);
 };
 
 startBtnEl.addEventListener("click", startTimer);
@@ -186,3 +220,4 @@ option4El.addEventListener("click", option4Response);
 option4El.addEventListener("click", displayQuestion);
 
 submitBtnEl.addEventListener("click", hideAnswer);
+submitBtnEl.addEventListener("click", showScore);

@@ -4,6 +4,7 @@
     --tertiary: rgb(53, 28, 117);
     --fourth: rgb(216, 160, 241);
     --fifth: rgb(155, 155, 155);
+    --sixth: rgb(217, 211, 233);
   }
 
   body {
@@ -131,4 +132,9 @@
     padding: 7px 15px;
     color: var(--primary);
     margin: 10px;
+  }
+
+  .displayScore {
+    background-color: var(--sixth);
+    padding: 10px 500px 10px 10px;
   }
