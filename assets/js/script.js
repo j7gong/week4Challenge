@@ -1,4 +1,5 @@
 var startBtnEl = document.querySelector("#btn-start");
+var submitBtnEl = document.querySelector("#btn-submit");
 var countNumEl = document.querySelector("#countdownNum");
 var timeLeft = 75; 
 
@@ -164,6 +165,10 @@ var option4Response = function () {
     console.log("ClickOption4: " + questionsNum);
 };
 
+var hideAnswer = function () {
+    answerEl.remove();
+};
+
 startBtnEl.addEventListener("click", startTimer);
 startBtnEl.addEventListener("click", hideStart);
 startBtnEl.addEventListener("click", displayQuestion);
@@ -179,3 +184,5 @@ option3El.addEventListener("click", displayQuestion);
 
 option4El.addEventListener("click", option4Response);
 option4El.addEventListener("click", displayQuestion);
+
+submitBtnEl.addEventListener("click", hideAnswer);
