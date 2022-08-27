@@ -226,36 +226,33 @@ var refresh = function () {
 
 var showScore = function () {
     questionContentEl.innerText = "High scores";
-
-    // Create placeholder to display initials input with score
-    var initialsInput = document.querySelector("input[name='initials']").value;
-    var displayScoreEl = document.createElement("div");
-    displayScoreEl.className = "displayScore";
-    var resultEl = document.createElement("p");
-    resultEl.innerText = initialsInput + " - " + scoreNumEl.innerText;
-    displayScoreEl.appendChild(resultEl);
-    finalScoreEl.append(displayScoreEl);
-    
-    scoreTextEl.remove();
-    enterInitialEl.remove();
-    
     // Store old score
     var personList = JSON.parse(localStorage.getItem("scoreList"));
     var orderDict = {};
     var person = initialsInput;
     var personScore = scoreNumEl.innerText
-    console.log("person: " + person + " personScore: " + personScore);
+    // console.log("person: " + person + " personScore: " + personScore);
     orderDict["order"] = localStorage.getItem("userOrder");
     orderDict[person] = personScore;
-
-    console.log("orderDict: " + JSON.stringify(orderDict));
-
+    // console.log("orderDict: " + JSON.stringify(orderDict));
     personList.push(orderDict);
     console.log("personList: " + JSON.stringify(personList));
 
     localStorage.setItem("scoreList", JSON.stringify(personList));
     // console.log("personDict: " + JSON.stringify(personDict));
     // console.log("scoreDict: " + scoreDict);
+
+    // Create placeholder to display initials input with score
+    var initialsInput = document.querySelector("input[name='initials']").value;
+    var displayScoreEl = document.createElement("div");
+    displayScoreEl.className = "displayScore";
+    var resultEl = document.createElement("p");
+    resultEl.innerText = localStorage.getItem("userOrder") + ". " + initialsInput + " - " + scoreNumEl.innerText;
+    displayScoreEl.appendChild(resultEl);
+    finalScoreEl.append(displayScoreEl);
+    
+    scoreTextEl.remove();
+    enterInitialEl.remove();
     
     // Create back button
     var btnContainer = document.createElement("div");
