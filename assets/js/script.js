@@ -62,7 +62,9 @@ var endGame = function () {
     
     // Count the final Score
     scoreNumEl.innerText = correctNum * correctScore;
-    console.log("final score: " + scoreNumEl);
+    
+    // Store the final Score
+    console.log("final score: " + correctNum * correctScore);
 
     // Display final score and allow user to save intials
     finalScoreEl.style.visibility = 'visible';
@@ -85,13 +87,17 @@ console.log("default correct number: " + correctNum);
 var totalScore = localStorage.getItem("totalScore");
 console.log("default score number: " + totalScore);
 
+// Initiate place to store previous score
+var scoreDict = localStorage.getItem("scoreDict");
+console.log("initial old Score: " + scoreDict);
+
 // function to display time
 function renderTime() {
     // render count on the screen
     countNumEl.innerHTML = timeLeft;
 
     // timeout on zero
-    if (timeLeft <= 0) {
+    if (timeLeft <= 0 || questionsNum == questions.length) {
         clearInterval(timer);
         countNumEl.innerHTML = 0;
         endGame();
@@ -119,6 +125,7 @@ var hideStart = function () {
 
 // display question
 var displayQuestion = function () {
+    localStorage.setItem("correctNum", 0);
 
     if (questionsNum < questions.length) {
 
@@ -159,7 +166,7 @@ var option1Response = function () {
     optionCommonResponse(option, questionsNum);
 
     localStorage.setItem("questionsNum", ++questionsNum); 
-    console.log("ClickOption1: " + questionsNum);
+    // console.log("ClickOption1: " + questionsNum);
 };
 
 var option2Response = function () {
@@ -167,7 +174,7 @@ var option2Response = function () {
     optionCommonResponse(option, questionsNum);
 
     localStorage.setItem("questionsNum", ++questionsNum); 
-    console.log("ClickOption2: " + questionsNum);
+    // console.log("ClickOption2: " + questionsNum);
 };
 
 var option3Response = function () {
@@ -175,7 +182,7 @@ var option3Response = function () {
     optionCommonResponse(option, questionsNum);
 
     localStorage.setItem("questionsNum", ++questionsNum); 
-    console.log("ClickOption3: " + questionsNum);
+    // console.log("ClickOption3: " + questionsNum);
 };
 
 var option4Response = function () {
@@ -183,21 +190,23 @@ var option4Response = function () {
     optionCommonResponse(option, questionsNum);
 
     localStorage.setItem("questionsNum", ++questionsNum); 
-    console.log("ClickOption4: " + questionsNum);
+    // console.log("ClickOption4: " + questionsNum);
 };
 
 var submitRefresh = function () {
     responseEl.remove();
     headerEl.style.visibility = "hidden";
-    localStorage.setItem("correctNum", 0);
+
 };
 
 var refresh = function () {
     window.location.reload();
+
 };
 
 var showScore = function () {
     questionContentEl.innerText = "High scores";
+
     // Create placeholder to display initials input with score
     var initialsInput = document.querySelector("input[name='initials']").value;
     var displayScoreEl = document.createElement("div");
@@ -209,7 +218,18 @@ var showScore = function () {
     
     scoreTextEl.remove();
     enterInitialEl.remove();
+    
+    // Store old score
+    var personDict = JSON.parse(localStorage.getItem("scoreDict"));
+    var person = initialsInput;
+    var personScore = scoreNumEl.innerText
+    // console.log("person: " + person + " personScore: " + personScore);
+    personDict[person] = personScore;
 
+    localStorage.setItem("scoreDict", JSON.stringify(personDict));
+    // console.log("personDict: " + JSON.stringify(personDict));
+    // console.log("scoreDict: " + scoreDict);
+    
     // Create back button
     var btnContainer = document.createElement("div");
     btnContainer.className = "btn-container";
@@ -218,7 +238,6 @@ var showScore = function () {
     backBtn.className = "btn";
     backBtn.setAttribute("id", "btn-back");
     
-    console.log(backBtn);
     btnContainer.appendChild(backBtn);
     
     // Create clear button
