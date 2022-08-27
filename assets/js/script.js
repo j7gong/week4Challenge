@@ -74,9 +74,14 @@ var endGame = function () {
     optionContentEl.remove();
 };
 
+if(questionsNum == null || correctNum == null || totalScore == null) {
+    localStorage.setItem("questionsNum", 0);
+    localStorage.setItem("correctNum", 0);
+    localStorage.setItem("totalScore", 0);
+};
+
 // Initiate number to count the question that has been answered 
 var questionsNum = localStorage.getItem("questionsNum");
-
 console.log("default question number: " + questionsNum);
 
 // Initiate number to count the question that has been answered correctly
@@ -87,18 +92,21 @@ console.log("default correct number: " + correctNum);
 var totalScore = localStorage.getItem("totalScore");
 console.log("default score number: " + totalScore);
 
-if(questionsNum == null || correctNum == null || totalScore == null) {
-    localStorage.setItem("questionsNum", 0);
-    localStorage.setItem("correctNum", 0);
-    localStorage.setItem("totalScore", 0);
+// Initiate place to store previous score
+var scoreList = localStorage.getItem("scoreList");
+if(scoreList == null) {
+    localStorage.setItem("scoreList", "[]");
+}; 
+
+console.log("initial old Score: " + scoreList);
+// Initiate number to track the order of initials input
+var userOrder = localStorage.getItem("userOrder");
+
+if (userOrder == null) {
+    localStorage.setItem("userOrder", 0);
 };
 
-// Initiate place to store previous score
-var scoreDict = localStorage.getItem("scoreDict");
-if(scoreDict == null) {
-    localStorage.setItem("scoreDict", "{}");
-}; 
-console.log("initial old Score: " + scoreDict);
+console.log("default userOrder: " + userOrder);
 
 // function to display time
 function renderTime() {
@@ -206,6 +214,9 @@ var submitRefresh = function () {
     responseEl.remove();
     headerEl.style.visibility = "hidden";
 
+    var userOrder = localStorage.getItem("userOrder");
+    localStorage.setItem("userOrder", ++userOrder);
+    console.log("userOrder: " + userOrder);
 };
 
 var refresh = function () {
@@ -229,13 +240,20 @@ var showScore = function () {
     enterInitialEl.remove();
     
     // Store old score
-    var personDict = JSON.parse(localStorage.getItem("scoreDict"));
+    var personList = JSON.parse(localStorage.getItem("scoreList"));
+    var orderDict = {};
     var person = initialsInput;
     var personScore = scoreNumEl.innerText
     console.log("person: " + person + " personScore: " + personScore);
-    personDict[person] = personScore;
+    orderDict["order"] = localStorage.getItem("userOrder");
+    orderDict[person] = personScore;
 
-    localStorage.setItem("scoreDict", JSON.stringify(personDict));
+    console.log("orderDict: " + JSON.stringify(orderDict));
+
+    personList.push(orderDict);
+    console.log("personList: " + JSON.stringify(personList));
+
+    localStorage.setItem("scoreList", JSON.stringify(personList));
     // console.log("personDict: " + JSON.stringify(personDict));
     // console.log("scoreDict: " + scoreDict);
     
