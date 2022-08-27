@@ -87,6 +87,12 @@ console.log("default correct number: " + correctNum);
 var totalScore = localStorage.getItem("totalScore");
 console.log("default score number: " + totalScore);
 
+if(questionsNum == null || correctNum == null || totalScore == null) {
+    localStorage.setItem("questionsNum", 0);
+    localStorage.setItem("correctNum", 0);
+    localStorage.setItem("totalScore", 0);
+};
+
 // Initiate place to store previous score
 var scoreDict = localStorage.getItem("scoreDict");
 if(scoreDict == null) {
