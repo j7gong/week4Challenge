@@ -89,6 +89,9 @@ console.log("default score number: " + totalScore);
 
 // Initiate place to store previous score
 var scoreDict = localStorage.getItem("scoreDict");
+if(scoreDict == null) {
+    localStorage.setItem("scoreDict", "{}");
+}; 
 console.log("initial old Score: " + scoreDict);
 
 // function to display time
@@ -223,7 +226,7 @@ var showScore = function () {
     var personDict = JSON.parse(localStorage.getItem("scoreDict"));
     var person = initialsInput;
     var personScore = scoreNumEl.innerText
-    // console.log("person: " + person + " personScore: " + personScore);
+    console.log("person: " + person + " personScore: " + personScore);
     personDict[person] = personScore;
 
     localStorage.setItem("scoreDict", JSON.stringify(personDict));
