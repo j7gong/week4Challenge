@@ -101,9 +101,11 @@
   }
 
   .finalScore {
+    background-color: var(--sixth);
     display: flex;
     justify-content: center;
     visibility: hidden;
+    margin: 2%;
   }
 
   .finalScore p {
@@ -135,7 +137,6 @@
   }
 
   .displayScore {
-    background-color: var(--sixth);
-    padding: 10px 50%;
-    margin-bottom: 5%;
+    padding: 10px 5%;
+    margin: 2%;
   }

@@ -1,7 +1,8 @@
 var startBtnEl = document.querySelector("#btn-start");
 var submitBtnEl = document.querySelector("#btn-submit");
 var countNumEl = document.querySelector("#countdownNum");
-var timeLeft = 75; 
+var timeLeft = 75;
+var correctScore = 11; 
 
 var startIntroEl = document.querySelector("#start-intro");
 var questionContentEl = document.querySelector("#question");
@@ -14,6 +15,7 @@ var responseEl = document.querySelector("#response");
 var answerEl = document.querySelector("#answer");
 
 var finalScoreEl = document.querySelector("#final-score");
+var scoreNumEl = document.querySelector("#finalScore");
 var scoreTextEl = document.querySelector("#scoreText");
 var enterInitialEl = document.querySelector("#enterInitials");
 var pageContentEl = document.querySelector("#page-content");
@@ -57,6 +59,10 @@ var endGame = function () {
     questionContentEl.innerText = "All Done!";
     optionContentEl.style.visibility = 'hidden';
     localStorage.setItem("questionsNum", 0);
+    
+    // Count the final Score
+    scoreNumEl.innerText = correctNum * correctScore;
+    console.log("final score: " + scoreNumEl);
 
     // Display final score and allow user to save intials
     finalScoreEl.style.visibility = 'visible';
@@ -70,6 +76,14 @@ var endGame = function () {
 var questionsNum = localStorage.getItem("questionsNum");
 
 console.log("default question number: " + questionsNum);
+
+// Initiate number to count the question that has been answered correctly
+var correctNum = localStorage.getItem("correctNum");
+console.log("default correct number: " + correctNum);
+
+// Initiate number to count the total score for question answered correctly
+var totalScore = localStorage.getItem("totalScore");
+console.log("default score number: " + totalScore);
 
 // function to display time
 function renderTime() {
@@ -126,6 +140,9 @@ var displayQuestion = function () {
 var optionCommonResponse = function (option, questionsNum) {
     if (option == questions[questionsNum].correctAnswer) {
         answerEl.innerText = 'Correct!';
+        localStorage.setItem("correctNum", ++correctNum);
+
+        console.log("Correct Num: " + correctNum);
         
     } else {
         answerEl.innerText = 'Wrong!';
@@ -169,9 +186,10 @@ var option4Response = function () {
     console.log("ClickOption4: " + questionsNum);
 };
 
-var hideAnswerHeader = function () {
+var submitRefresh = function () {
     responseEl.remove();
     headerEl.style.visibility = "hidden";
+    localStorage.setItem("correctNum", 0);
 };
 
 var refresh = function () {
@@ -185,7 +203,7 @@ var showScore = function () {
     var displayScoreEl = document.createElement("div");
     displayScoreEl.className = "displayScore";
     var resultEl = document.createElement("p");
-    resultEl.innerText = initialsInput;
+    resultEl.innerText = initialsInput + " - " + scoreNumEl.innerText;
     displayScoreEl.appendChild(resultEl);
     finalScoreEl.append(displayScoreEl);
     
@@ -234,7 +252,7 @@ option3El.addEventListener("click", displayQuestion);
 option4El.addEventListener("click", option4Response);
 option4El.addEventListener("click", displayQuestion);
 
-submitBtnEl.addEventListener("click", hideAnswerHeader);
+submitBtnEl.addEventListener("click", submitRefresh);
 submitBtnEl.addEventListener("click", showScore);
 
 
