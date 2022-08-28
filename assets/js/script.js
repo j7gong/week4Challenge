@@ -145,7 +145,7 @@ var hideStart = function () {
 var displayQuestion = function () {
     localStorage.setItem("correctNum", 0);
 
-    if (questionsNum < questions.length) {
+    if ( questionsNum < questions.length) {
 
         questionContentEl.innerText = questions[questionsNum].question;
     
@@ -225,6 +225,38 @@ var refresh = function () {
 
 };
 
+var clearScores = function () {
+    localStorage.clear();
+    finalScoreEl.style.visibility = "hidden"; 
+};
+
+var createBackClearButton = function () {
+    // Create back button
+    var btnContainer = document.createElement("div");
+    btnContainer.className = "btn-container";
+    var backBtn = document.createElement("button");
+    backBtn.textContent = "Go back";
+    backBtn.className = "btn";
+    backBtn.setAttribute("id", "btn-back");
+    
+    btnContainer.appendChild(backBtn);
+    
+    // Create clear button
+    var clearBtn = document.createElement("button");
+    clearBtn.textContent = "Clear high scores";
+    clearBtn.className = "btn";
+    btnContainer.appendChild(clearBtn);
+    clearBtn.setAttribute("id", "btn-clear");
+
+    pageContentEl.appendChild(btnContainer);
+
+    var backBtnEl = document.querySelector("#btn-back");
+    var clearBtnEl = document.querySelector("#btn-clear");
+
+    backBtnEl.addEventListener("click", refresh);
+    clearBtn.addEventListener("click", clearScores);
+};
+
 var showScore = function () {
     questionContentEl.innerText = "High scores";
 
@@ -257,29 +289,7 @@ var showScore = function () {
     scoreTextEl.remove();
     enterInitialEl.remove();
     
-    // Create back button
-    var btnContainer = document.createElement("div");
-    btnContainer.className = "btn-container";
-    var backBtn = document.createElement("button");
-    backBtn.textContent = "Go back";
-    backBtn.className = "btn";
-    backBtn.setAttribute("id", "btn-back");
-    
-    btnContainer.appendChild(backBtn);
-    
-    // Create clear button
-    var clearBtn = document.createElement("button");
-    clearBtn.textContent = "Clear high scores";
-    clearBtn.className = "btn";
-    btnContainer.appendChild(clearBtn);
-    clearBtn.setAttribute("id", "btn-clear");
-
-    pageContentEl.appendChild(btnContainer);
-
-    var backBtnEl = document.querySelector("#btn-back");
-    // var clearBtnEl = document.querySelector("#btn-clear");
-
-    backBtnEl.addEventListener("click", refresh);
+    createBackClearButton();
 };
 
 var showHighScore = function () {    
@@ -317,29 +327,7 @@ var clickRefresh = function () {
     startIntroEl.remove();
     startBtnEl.remove();
 
-    // Create back button
-    var btnContainer = document.createElement("div");
-    btnContainer.className = "btn-container";
-    var backBtn = document.createElement("button");
-    backBtn.textContent = "Go back";
-    backBtn.className = "btn";
-    backBtn.setAttribute("id", "btn-back");
-    
-    btnContainer.appendChild(backBtn);
-    
-    // Create clear button
-    var clearBtn = document.createElement("button");
-    clearBtn.textContent = "Clear high scores";
-    clearBtn.className = "btn";
-    btnContainer.appendChild(clearBtn);
-    clearBtn.setAttribute("id", "btn-clear");
-
-    pageContentEl.appendChild(btnContainer);
-
-    var backBtnEl = document.querySelector("#btn-back");
-    // var clearBtnEl = document.querySelector("#btn-clear");
-
-    backBtnEl.addEventListener("click", refresh);
+    createBackClearButton();
 };
 
 startBtnEl.addEventListener("click", startTimer);
