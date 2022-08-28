@@ -20,6 +20,7 @@ var scoreTextEl = document.querySelector("#scoreText");
 var enterInitialEl = document.querySelector("#enterInitials");
 var pageContentEl = document.querySelector("#page-content");
 var headerEl = document.querySelector("header");
+var highScoreEl = document.querySelector("#highScore");
 
 // Initiate question list
 var questions = [
@@ -226,21 +227,6 @@ var refresh = function () {
 
 var showScore = function () {
     questionContentEl.innerText = "High scores";
-    // Store old score
-    var personList = JSON.parse(localStorage.getItem("scoreList"));
-    var orderDict = {};
-    var person = initialsInput;
-    var personScore = scoreNumEl.innerText
-    // console.log("person: " + person + " personScore: " + personScore);
-    orderDict["order"] = localStorage.getItem("userOrder");
-    orderDict[person] = personScore;
-    // console.log("orderDict: " + JSON.stringify(orderDict));
-    personList.push(orderDict);
-    console.log("personList: " + JSON.stringify(personList));
-
-    localStorage.setItem("scoreList", JSON.stringify(personList));
-    // console.log("personDict: " + JSON.stringify(personDict));
-    // console.log("scoreDict: " + scoreDict);
 
     // Create placeholder to display initials input with score
     var initialsInput = document.querySelector("input[name='initials']").value;
@@ -251,9 +237,86 @@ var showScore = function () {
     displayScoreEl.appendChild(resultEl);
     finalScoreEl.append(displayScoreEl);
     
+    // Store old score
+    var personList = JSON.parse(localStorage.getItem("scoreList"));
+    var orderDict = {};
+    var person = initialsInput;
+    var personScore = scoreNumEl.innerText
+    // console.log("person: " + person + " personScore: " + personScore);
+    orderDict["order"] = localStorage.getItem("userOrder");
+    orderDict["person"] = person;
+    orderDict["score"] = personScore;
+    // console.log("orderDict: " + JSON.stringify(orderDict));
+    personList.push(orderDict);
+    console.log("personList: " + JSON.stringify(personList));
+
+    localStorage.setItem("scoreList", JSON.stringify(personList));
+    // console.log("personDict: " + JSON.stringify(personDict));
+    // console.log("scoreDict: " + scoreDict);
+
     scoreTextEl.remove();
     enterInitialEl.remove();
     
+    // Create back button
+    var btnContainer = document.createElement("div");
+    btnContainer.className = "btn-container";
+    var backBtn = document.createElement("button");
+    backBtn.textContent = "Go back";
+    backBtn.className = "btn";
+    backBtn.setAttribute("id", "btn-back");
+    
+    btnContainer.appendChild(backBtn);
+    
+    // Create clear button
+    var clearBtn = document.createElement("button");
+    clearBtn.textContent = "Clear high scores";
+    clearBtn.className = "btn";
+    btnContainer.appendChild(clearBtn);
+    clearBtn.setAttribute("id", "btn-clear");
+
+    pageContentEl.appendChild(btnContainer);
+
+    var backBtnEl = document.querySelector("#btn-back");
+    // var clearBtnEl = document.querySelector("#btn-clear");
+
+    backBtnEl.addEventListener("click", refresh);
+};
+
+var showHighScore = function () {    
+    // show all old score
+    var personList = JSON.parse(localStorage.getItem("scoreList"));
+
+    // Create placeholder to display initials input with historical high score
+
+    for (var i = 0; i< personList.length; i++) {
+        console.log(personList[i].order);
+        console.log(personList[i].person);
+        console.log(personList[i].score);
+
+        var displayScoreEl = document.createElement("div");
+        displayScoreEl.className = "displayScore";
+        var resultEl = document.createElement("p");
+
+        resultEl.innerText = personList[i].order + ". " + personList[i].person + " - " + personList[i].score;
+        displayScoreEl.appendChild(resultEl);
+        finalScoreEl.append(displayScoreEl);
+    };
+};
+
+var clickRefresh = function () {
+    questionContentEl.innerText = "High scores";
+
+    finalScoreEl.style.visibility = "visible";
+
+    // hide unnecessary sections
+    headerEl.style.visibility = "hidden";
+    scoreTextEl.remove();
+    optionContentEl.remove();
+    enterInitialEl.remove();
+    responseEl.remove();
+    startIntroEl.remove();
+    startBtnEl.remove();
+
     // Create back button
     var btnContainer = document.createElement("div");
     btnContainer.className = "btn-container";
@@ -297,5 +360,8 @@ option4El.addEventListener("click", displayQuestion);
 
 submitBtnEl.addEventListener("click", submitRefresh);
 submitBtnEl.addEventListener("click", showScore);
+
+highScoreEl.addEventListener("click", clickRefresh);
+highScoreEl.addEventListener("click", showHighScore);
 
 

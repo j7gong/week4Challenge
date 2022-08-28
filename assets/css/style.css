@@ -24,7 +24,7 @@
     justify-content: space-between;
   }
 
-  .score {
+  .highscore {
     color: var(--fourth);
   }
 
@@ -103,6 +103,7 @@
   .finalScore {
     background-color: var(--sixth);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     visibility: hidden;
     margin: 2%;
