@@ -28,6 +28,12 @@
     color: var(--fourth);
   }
 
+  .highscore:hover {
+    background-color: var(--fourth);
+    color: var(--secondary);
+    cursor: pointer;
+  }
+
   main {
     display: flex;
     flex-direction: column;
