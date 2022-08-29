@@ -40,9 +40,9 @@ GIVEN I am taking a code quiz
 * JavaScript
 
 ## **Website**
+https://j7gong.github.io/week4Challenge/
 
-
-![GitHub Logo](/assets/images/)
+![GitHub Logo](/assets/images/applicationImg.JPG)
 
 ## **Contribution** 
 
